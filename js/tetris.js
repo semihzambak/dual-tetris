@@ -55,7 +55,7 @@ function drawMatrix(matrix, offset) {
         row.forEach((value, x) => {
             if (value !== 0) {
                 context.fillStyle = colors[value];
-                context.fillRect(y + offset.y, x + offset.x, 1, 1);
+                context.fillRect(y + offset.y, x + offset.x, 1 - .05, 1- .05);
             }
         })
     });
