@@ -1,3 +1,3 @@
 # Dual-Tetris
 Play:
-https://semihzambak.github.io/Dual-Tetris/
+https://dual-tetris.zambak.me/
