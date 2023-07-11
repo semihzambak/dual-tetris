@@ -1,66 +1,106 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <title>Dual Tetris</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-        </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <style>
-        .outer {
-            display: table;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-        }
-
-        .inner {
-            display: table-cell;
-            vertical-align: middle;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <div class="outer">
-        <div class="inner">
-            <div class="container" style="padding:0px">
-                <div class="row">
-                    <div class="col">
-                        <h1>Dual Tetris</h1>
-                    </div>
-                    <div class="col text-right">
-                        <h3 id="score"></h3>
+<body class="flex flex-col h-screen bg-white dark:bg-zinc-950">
+<header>
+    <div class="max-w-screen-lg mx-auto px-6 flex items-end space-x-1 mt-2">
+        <h1 id="title" class="text-2xl font-bold text-slate-800 dark:text-slate-200">Dual Tetris</h1>
+        <span class="text-sm text-slate-400 dark:text-slate-600">is maintained by <a href="https://zambak.me"
+                                                                                     target="_blank">semih</a></span>
+    </div>
+</header>
+<main class="flex flex-1 items-center justify-center">
+    <div id="play">
+        <button id="start" onclick="playGame()"
+                class="bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-500 font-bold px-4 rounded-lg shadow">
+            Play
+        </button>
+    </div>
+    <div id="game" class="flex flex-1 items-center justify-center hidden">
+        <div class="w-60">
+            <div class="mr-4">
+                <div class="flex w-56 justify-center">
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">W</span>
                     </div>
                 </div>
-                <canvas id="tetris" width="900" height="360"></canvas>
-                <hr>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary" onclick="up()">Up (Up Arrow)</button>
+                <div class="flex w-56 justify-between mt-2">
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">A</span>
                     </div>
-                    <div class="col">
-                        <button class="btn btn-primary" onclick="rotateButton()">Rotate (Space)</button> </div>
-                    <div class="col">
-                        <button class="btn btn-primary" onclick="drop()">Drop (Left or Right Arrow)</button> </div>
-                    <div class="col">
-                        <button class="btn btn-primary" onclick="down()">Down (Down Arrow)</button> </div>
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">S</span>
+                    </div>
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">D</span>
+                    </div>
                 </div>
+                <p id="player-one-name"
+                   class="flex justify-center text-xl mt-4 text-zinc-500 underline">Player One</p>
+                <p id="playerone" class="flex justify-center text-lg mt-1 text-slate-800 dark:text-slate-200">0</p>
+            </div>
+        </div>
+        <div class="w-96">
+            <canvas id="tetris" width="360" height="720" class="bg-zinc-500"></canvas>
+        </div>
+        <div class="w-60">
+            <div class="ml-4">
+                <div class="flex w-56 justify-center mt-4">
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">&uarr;</span>
+                    </div>
+                </div>
+                <div class="flex w-56 justify-between mt-2">
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">&larr;</span>
+                    </div>
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc-600 text-lg">&darr;</span>
+                    </div>
+                    <div class="w-16 h-16 flex items-center justify-center bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold rounded-lg shadow">
+                        <span class="text-zinc`-600 text-lg">&rarr;</span>
+                    </div>
+                </div>
+                <p id="player-two-name" class="flex justify-center text-xl mt-4 text-zinc-500">
+                    Player Two</p>
+                <p id="playertwo" class="flex justify-center text-lg mt-1 text-slate-800 dark:text-slate-200">0</p>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/pieces.js"></script>
-    <script type="text/javascript" src="js/tetris.js"></script>
-</body>
+    <div id="game-over" class="flex flex-col justify-center hidden">
+        <div>
+            <p class="text-4xl text-slate-800 dark:text-slate-200">Game Over</p>
+            <p id="winner-parent" class="text-xl text-slate-400 dark:text-slate-600">Player <span id="winner"
+                                                                                                  class="text-slate-800 dark:text-slate-200"></span>
+                won!</p>
+            <p id="draw" class="text-xl text-slate-400 dark:text-slate-600"></p>
+            <p class="text-xl text-slate-400 dark:text-slate-600">Score: <span id="score"
+                                                                               class="text-slate-800 dark:text-slate-200"></span>
+            </p>
+        </div>
+        <button id="restart" onclick="playGame()"
+                class="bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-700 font-bold px-4 rounded-lg shadow mt-4">
+            Restart
+        </button>
+    </div>
+</main>
+<footer>
+    <div class="max-w-screen-lg mx-auto mb-4 flex items-center justify-center">
+        <a href="https://twitter.com/SemihZambak" class="text-zinc-500 hover:opacity-75 transition duration-150"
+           target="_blank">
+            <svg width="52" height="52" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M256 475C376.95 475 475 376.95 475 256C475 135.05 376.95 37 256 37C135.05 37 37 135.05 37 256C37 376.95 135.05 475 256 475ZM55.9999 256C55.9999 145.543 145.543 55.9999 256 55.9999C366.457 55.9999 456 145.543 456 256C456 366.457 366.457 456 256 456C145.543 456 55.9999 366.457 55.9999 256ZM256 78.1401C157.771 78.1401 78.1401 157.771 78.1401 256C78.1401 354.229 157.771 433.86 256 433.86C354.229 433.86 433.86 354.229 433.86 256C433.86 157.771 354.229 78.1401 256 78.1401ZM298.804 267.808L310.612 239.026L256 117.993L202.863 239.026L214.672 267.808L100.28 222.79L146.775 346.789L244.711 384.899L241.24 394.376L256.738 389.579L263.413 391.749L263.422 391.752L271.498 394.376L268.765 384.897L366.701 346.775L413.195 222.79L298.804 267.808ZM378.809 257.736L306.102 286.35C298.673 289.273 290.217 287.481 284.613 281.796C279.009 276.111 277.339 267.63 280.369 260.245L288.921 239.401L256.249 166.993L224.51 239.29L233.107 260.245C236.136 267.63 234.466 276.111 228.862 281.796C223.258 287.481 214.803 289.273 207.374 286.35L134.664 257.735L162.304 331.45L251.937 366.329C253.695 367.014 255.302 367.921 256.738 369.006C258.175 367.919 259.782 367.012 261.537 366.329L351.171 331.437L378.809 257.736Z" fill="currentColor"/>
+            </svg>
 
+        </a>
+    </div>
+</footer>
+<script type="text/javascript" src="js/pieces.js"></script>
+<script type="text/javascript" src="js/tetris.js"></script>
+</body>
 
 </html>
