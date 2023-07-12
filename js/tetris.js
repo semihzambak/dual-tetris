@@ -228,6 +228,22 @@ function onKeyDown(event) {
     }
 }
 
+function left(turn) {
+    if (direction === turn)  playerMove(-1);
+}
+
+function right(turn) {
+    if (direction === turn)  playerMove(1);
+}
+
+function up(turn) {
+    if (direction === turn)  playerRotate(1);
+}
+
+function down(turn) {
+    if (direction === turn)  pieceDrop();
+}
+
 function gameOver() {
     play = false;
     document.getElementById("winner-parent").classList.remove("hidden");
