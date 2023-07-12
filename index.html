@@ -6,20 +6,15 @@
     <meta charset="UTF-8">
 </head>
 
-<body class="flex flex-col h-screen bg-white dark:bg-zinc-950">
+<body class="font-mono max-w-4xl mx-auto px-6 flex flex-col h-screen bg-white dark:bg-zinc-950">
 <header>
-    <div class="max-w-screen-lg mx-auto px-6 flex items-end space-x-1 mt-2">
-        <h1 id="title" class="text-2xl font-bold text-slate-800 dark:text-slate-200">Dual Tetris</h1>
-        <span class="text-sm text-slate-400 dark:text-slate-600">is maintained by <a href="https://zambak.me"
+    <div class="flex items-end space-x-1 mt-2">
+        <h1 id="title" class="text-4xl lg:text-xl tracking-tight font-bold text-slate-800 dark:text-slate-200">Dual Tetris</h1>
+        <span class="text-xl lg:text-md text-slate-400 dark:text-slate-600">is maintained by <a href="https://zambak.me"
                                                                                      target="_blank">semih</a></span>
     </div>
 </header>
-<main class="flex flex-1 items-center justify-center">
-    <div class="md:hidden block text-slate-800 dark:text-slate-200">
-        <h1 class="text-2xl">Sorry 🥺</h1>
-        <span class="text-lg font-thin">Not playable on this screen size yet</span>
-    </div>
-    <div class="flex items-center justify-center hidden md:block">
+<main class="flex-1 items-center justify-center hidden lg:flex">
         <div id="play">
             <button id="start" onclick="playGame()"
                     class="bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700 text-zinc-500 font-bold px-4 rounded-lg shadow">
@@ -101,14 +96,18 @@
                 Restart
             </button>
         </div>
+</main>
+<main class="flex-auto lg:hidden flex items-center justify-center ">
+    <div class="lg:hidden flex flex-col text-slate-800 dark:text-slate-200 space-y-4">
+        <h1 class="text-4xl md:text-5xl">Sorry 🥺</h1>
+        <span class="text-2xl md:text-3xl font-thin">Not playable on this screen size yet</span>
     </div>
-
 </main>
 <footer>
     <div class="max-w-screen-lg mx-auto mb-4 flex items-center justify-center">
         <a href="https://zambak.me" class="text-zinc-500 hover:opacity-75 transition duration-150"
            target="_blank">
-            <svg width="52" height="52" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="lg:h-12 lg:w-12 md:h-16 md:w-16 h-24 w-24 flex-no-shrink fill-current" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M256 475C376.95 475 475 376.95 475 256C475 135.05 376.95 37 256 37C135.05 37 37 135.05 37 256C37 376.95 135.05 475 256 475ZM55.9999 256C55.9999 145.543 145.543 55.9999 256 55.9999C366.457 55.9999 456 145.543 456 256C456 366.457 366.457 456 256 456C145.543 456 55.9999 366.457 55.9999 256ZM256 78.1401C157.771 78.1401 78.1401 157.771 78.1401 256C78.1401 354.229 157.771 433.86 256 433.86C354.229 433.86 433.86 354.229 433.86 256C433.86 157.771 354.229 78.1401 256 78.1401ZM298.804 267.808L310.612 239.026L256 117.993L202.863 239.026L214.672 267.808L100.28 222.79L146.775 346.789L244.711 384.899L241.24 394.376L256.738 389.579L263.413 391.749L263.422 391.752L271.498 394.376L268.765 384.897L366.701 346.775L413.195 222.79L298.804 267.808ZM378.809 257.736L306.102 286.35C298.673 289.273 290.217 287.481 284.613 281.796C279.009 276.111 277.339 267.63 280.369 260.245L288.921 239.401L256.249 166.993L224.51 239.29L233.107 260.245C236.136 267.63 234.466 276.111 228.862 281.796C223.258 287.481 214.803 289.273 207.374 286.35L134.664 257.735L162.304 331.45L251.937 366.329C253.695 367.014 255.302 367.921 256.738 369.006C258.175 367.919 259.782 367.012 261.537 366.329L351.171 331.437L378.809 257.736Z"
                       fill="currentColor"/>
